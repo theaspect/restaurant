@@ -4,15 +4,25 @@
  * This generated file contains a sample Kotlin application project to get you started.
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/7.4/userguide/building_java_projects.html
+ *
+ * Dependencies updated using https://micronaut.io/launch
  */
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.5.31"
+    id("org.jetbrains.kotlin.jvm") version "1.6.21"
+    id("org.jetbrains.kotlin.kapt") version "1.6.21"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.6.21"
 
-    // Apply the application plugin to add support for building a CLI application in Java.
-    application
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+
+    id("io.micronaut.application") version "3.6.2"
 }
+
+version = "0.1"
+group = "io.resto"
+
+val kotlinVersion= project.properties["kotlinVersion"]
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -20,23 +30,49 @@ repositories {
 }
 
 dependencies {
-    // Align versions of all Kotlin components
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
     // Use the Kotlin JDK 8 standard library.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
 
-    // This dependency is used by the application.
-    implementation("com.google.guava:guava:30.1.1-jre")
+    // Minimal Micronaut dependencies
+    kapt("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
 
-    // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
 application {
     // Define the main class for the application.
     mainClass.set("io.resto.echo1.AppKt")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+}
+
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+}
+graalvmNative.toolchainDetection.set(false)
+micronaut {
+    runtime("netty")
+    testRuntime("kotest5")
+    processing {
+        incremental(true)
+        annotations("io.resto.*")
+    }
 }
