@@ -1,1 +1,1 @@
-ECHO is on.
+gradle init --type kotlin-application
