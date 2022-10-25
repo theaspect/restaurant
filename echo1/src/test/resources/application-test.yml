@@ -1,14 +1,4 @@
-datasources:
-  default:
-    connection-timeout: 300
-
-micronaut:
-  http:
-    client:
-      read-idle-timeout: 5m
-
 test-resources:
   containers:
     mysql:
       image-name: mysql:8
-      startup-timeout: 5m

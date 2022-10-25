@@ -49,11 +49,6 @@ dependencies {
     // Database connection
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("mysql:mysql-connector-java")
-
-    // Testcontainers
-    testImplementation("org.testcontainers:mysql")
-    testImplementation("org.testcontainers:testcontainers")
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
 }
 
 application {
