@@ -17,6 +17,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 
     id("io.micronaut.application") version "3.6.2"
+    id("io.micronaut.test-resources") version "3.6.2"
 }
 
 version = "0.1"
@@ -44,6 +45,10 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // Database connection
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("mysql:mysql-connector-java")
 }
 
 application {
@@ -74,5 +79,8 @@ micronaut {
     processing {
         incremental(true)
         annotations("io.resto.*")
+    }
+    testResources {
+        additionalModules.add("jdbc-mysql")
     }
 }
