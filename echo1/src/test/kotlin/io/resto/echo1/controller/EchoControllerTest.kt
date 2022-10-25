@@ -8,6 +8,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.uri.UriBuilder
 import io.micronaut.test.extensions.kotest5.annotation.MicronautTest
 import jakarta.inject.Inject
+import java.time.LocalDateTime
 
 @MicronautTest
 class EchoControllerTest(
@@ -20,5 +21,9 @@ class EchoControllerTest(
         val actual: String = client.toBlocking().retrieve(HttpRequest.GET<String>(uri))
 
         actual shouldBe expected
+    }
+
+    "db time should not be null" {
+        client.toBlocking().retrieve(HttpRequest.GET<LocalDateTime>("/dbTime"))
     }
 })

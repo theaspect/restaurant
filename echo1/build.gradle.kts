@@ -23,7 +23,7 @@ plugins {
 version = "0.1"
 group = "io.resto"
 
-val kotlinVersion= project.properties["kotlinVersion"]
+val kotlinVersion = project.properties["kotlinVersion"]
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -49,6 +49,11 @@ dependencies {
     // Database connection
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("mysql:mysql-connector-java")
+
+    // Testcontainers
+    testImplementation("org.testcontainers:mysql")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
 }
 
 application {

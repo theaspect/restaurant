@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: echo1
+
 netty:
   default:
     allocator:
