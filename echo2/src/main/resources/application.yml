@@ -5,3 +5,8 @@ netty:
   default:
     allocator:
       max-order: 3
+
+datasources:
+  default:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    db-type: mysql
