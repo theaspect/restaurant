@@ -1,0 +1,31 @@
+# Run with docker compose up
+version: "3.9"
+services:
+  echo1:
+    image: echo1:latest
+    depends_on:
+      - mysql
+    environment:
+      MICRONAUT_ENVIRONMENTS: cloud
+      DATASOURCES_DEFAULT_USERNAME: root
+      DATASOURCES_DEFAULT_PASSWORD: password
+      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/db
+    ports:
+      - "127.0.0.1:8081:8080"
+  echo2:
+    image: echo2:latest
+    depends_on:
+      - mysql
+    environment:
+      MICRONAUT_ENVIRONMENTS: cloud
+      DATASOURCES_DEFAULT_USERNAME: root
+      DATASOURCES_DEFAULT_PASSWORD: password
+      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/db
+    ports:
+      - "127.0.0.1:8082:8080"
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
