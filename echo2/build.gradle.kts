@@ -76,3 +76,15 @@ micronaut {
         additionalModules.add("jdbc-mysql")
     }
 }
+
+// See https://micronaut-projects.github.io/micronaut-gradle-plugin/snapshot/#_docker_support
+tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
+    // baseImage.set("eclipse-temurin:11")
+    baseImage.set("gcr.io/distroless/java11-debian11")
+    args("-Xmx128m")
+}
+
+tasks.named<com.bmuschko.gradle.docker.tasks.image.DockerBuildImage>("dockerBuild") {
+    // TODO specify docker repo here
+    // images.add("eu-frankfurt-1.ocir.io/xyzzyz/repo/my-image:$project.version")
+}
