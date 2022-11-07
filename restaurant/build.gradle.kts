@@ -45,7 +45,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("io.resto.echo2.Echo2AppKt")
+    mainClass.set("io.resto.restaurant.RestaurantAppKt")
 }
 
 java {

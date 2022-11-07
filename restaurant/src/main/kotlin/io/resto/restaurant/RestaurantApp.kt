@@ -1,4 +1,4 @@
-package io.resto.echo2
+package io.resto.restaurant
 
 import io.micronaut.runtime.Micronaut
 
