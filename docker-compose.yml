@@ -1,6 +1,15 @@
 # Run with docker compose up
 version: "3.9"
 services:
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+    volumes:
+      - "./mysql/init:/docker-entrypoint-initdb.d"
+      - "./mysql/data:/var/lib/mysql"
   echo1:
     image: echo1:latest
     depends_on:
@@ -19,13 +28,15 @@ services:
       DATASOURCES_DEFAULT_USERNAME: root
       DATASOURCES_DEFAULT_PASSWORD: password
       DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/db
-  mysql:
-    image: mysql:8
-    restart: always
+  restaurant:
+    image: restaurant:latest
+    depends_on:
+      - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db
-
+      MICRONAUT_ENVIRONMENTS: cloud
+      DATASOURCES_DEFAULT_USERNAME: restaurant
+      DATASOURCES_DEFAULT_PASSWORD: restaurant
+      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/restaurant
   nginx:
     image: nginx:1.23.2
     restart: always
