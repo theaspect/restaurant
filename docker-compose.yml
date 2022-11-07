@@ -31,6 +31,51 @@ services:
       DATASOURCES_DEFAULT_USERNAME: root
       DATASOURCES_DEFAULT_PASSWORD: password
       DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/db
+#  auth:
+#    image: auth:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: auth
+#      DATASOURCES_DEFAULT_PASSWORD: auth
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/auth
+#  delivery:
+#    image: delivery:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: delivery
+#      DATASOURCES_DEFAULT_PASSWORD: delivery
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/delivery
+#  loyalty:
+#    image: loyalty:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: loyalty
+#      DATASOURCES_DEFAULT_PASSWORD: loyalty
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/loyalty
+#  menu:
+#    image: menu:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: menu
+#      DATASOURCES_DEFAULT_PASSWORD: menu
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/menu
+#  order:
+#    image: order:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: order
+#      DATASOURCES_DEFAULT_PASSWORD: order
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/order
   restaurant:
     image: restaurant:latest
     depends_on:
@@ -40,6 +85,42 @@ services:
       DATASOURCES_DEFAULT_USERNAME: restaurant
       DATASOURCES_DEFAULT_PASSWORD: restaurant
       DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/restaurant
+#  salary:
+#    image: salary:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: salary
+#      DATASOURCES_DEFAULT_PASSWORD: salary
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/salary
+#  staff:
+#    image: staff:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: staff
+#      DATASOURCES_DEFAULT_PASSWORD: staff
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/staff
+#  stock:
+#    image: stock:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: stock
+#      DATASOURCES_DEFAULT_PASSWORD: stock
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/stock
+#  supply:
+#    image: supply:latest
+#    depends_on:
+#      - mysql
+#    environment:
+#      MICRONAUT_ENVIRONMENTS: cloud
+#      DATASOURCES_DEFAULT_USERNAME: supply
+#      DATASOURCES_DEFAULT_PASSWORD: supply
+#      DATASOURCES_DEFAULT_URL: jdbc:mysql://mysql:3306/supply
   nginx:
     image: nginx:1.23.2
     restart: always
