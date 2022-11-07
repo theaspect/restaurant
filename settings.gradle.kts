@@ -12,4 +12,5 @@ rootProject.name = "restraunt"
 include(
 	":echo1",
 	":echo2",
+	":restaurant"
 )
