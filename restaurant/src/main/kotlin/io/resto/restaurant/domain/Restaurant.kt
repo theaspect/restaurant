@@ -5,11 +5,13 @@ import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.data.annotation.Version
 
+typealias RestaurantId = Int
+
 @MappedEntity
 class Restaurant(
     @field:Id
     @field:GeneratedValue
-    var id: Int? = null,
+    var id: RestaurantId? = null,
 
     val name: String,
 
@@ -21,5 +23,5 @@ class Restaurant(
     val longitude: Double,
 
     @field:Version
-    var version: Int?,
+    var version: Int? = 0,
 )
