@@ -30,44 +30,36 @@ class RestaurantController(
 
     @Post("/")
     fun create(
-        @QueryValue name: String,
-
-        @QueryValue city: String,
-        @QueryValue street: String,
-        @QueryValue house: String,
-
-        @QueryValue latitude: Double,
-        @QueryValue longitude: Double,
+        @Body restaurant: Restaurant,
     ): Restaurant {
-        log.info("Create new restaurant $name")
+        log.info("Create new restaurant $restaurant")
 
-        return restaurantRepo.save(
-            Restaurant(
-                id = null,
-                name = name,
-                city = city,
-                street = street,
-                house = house,
-                latitude = latitude,
-                longitude = longitude,
-            )
-        )
+        require(restaurant.id == null) { "Id should be null" }
+
+        // Force version to be 0
+        restaurant.version = 0
+
+        return restaurantRepo.save(restaurant)
     }
 
-    @Patch("/")
+    @Patch("/{restaurantId}")
     fun update(
-        @Body restaurant: Restaurant
+        @PathVariable restaurantId: RestaurantId,
+        @QueryValue name: String,
     ): Restaurant {
-        val dbRestaurant = restaurantRepo.findById(restaurant.id!!)
-            .orElseThrow { IllegalArgumentException("Can't find restaurant ${restaurant.id}") }
+        val dbRestaurant = restaurantRepo.findById(restaurantId)
+            .orElseThrow { IllegalArgumentException("Can't find restaurant $restaurantId") }
 
-        require(restaurant.version == dbRestaurant.version)
-        {
-            "Optimistic lock exception for restaurant id ${restaurant.id}: " +
-                    "db version ${dbRestaurant.version} != patch version ${restaurant.version}"
-        }
+        return restaurantRepo.update(dbRestaurant.apply {
+            this.name = name
+        })
+    }
 
-        return restaurantRepo.update(dbRestaurant)
+    @Delete("/{restaurantId}")
+    fun delete(
+        @PathVariable restaurantId: RestaurantId
+    ) {
+        restaurantRepo.deleteById(restaurantId)
     }
 
 }

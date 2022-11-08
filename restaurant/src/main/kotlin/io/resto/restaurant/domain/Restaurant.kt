@@ -13,7 +13,10 @@ class Restaurant(
     @field:GeneratedValue
     var id: RestaurantId? = null,
 
-    val name: String,
+    /**
+     * Only name can be updated
+     */
+    var name: String,
 
     val city: String,
     val street: String,
