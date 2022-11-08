@@ -7,3 +7,8 @@ build
 # Ignore IDEA project file
 .idea
 *.iml
+
+# Ignore js build
+node_modules
+package-lock.json
+dist

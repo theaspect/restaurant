@@ -1,3 +1,15 @@
+# Install dependencies
+
+```
+winget install -e --id EclipseAdoptium.Temurin.11.JDK
+winget install -e --id Docker.DockerDesktop
+winget install OpenJS.NodeJS.LTS
+```
+
+# Run frontend
+
+`npm run build`
+
 # Deploy procedure
 
 1. Build and run tests `./gradlew build`
