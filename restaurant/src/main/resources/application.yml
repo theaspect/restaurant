@@ -11,3 +11,8 @@ datasources:
   default:
     driverClassName: com.mysql.cj.jdbc.Driver
     db-type: mysql
+
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:db/00--changelog.yml'

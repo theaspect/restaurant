@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - preConditions:
+      onFail: HALT
+      onError: HALT
+  - include:
+      file: 01--create-restaurant-table.yml
+      relativeToChangelogFile: true

@@ -1,4 +1,3 @@
-
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.6.21"
@@ -14,7 +13,7 @@ plugins {
 version = "0.1"
 group = "io.resto"
 
-val kotlinVersion= project.properties["kotlinVersion"]
+val kotlinVersion = project.properties["kotlinVersion"]
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -38,9 +37,17 @@ dependencies {
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    // Database connection
+    // Micronaut data library
+    kapt("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.liquibase:micronaut-liquibase")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+
+    // Database driver
     runtimeOnly("mysql:mysql-connector-java")
+
+    // Read csv file with dataset
+    implementation("com.opencsv:opencsv:4.1")
 }
 
 application {
