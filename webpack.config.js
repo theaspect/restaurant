@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     context: path.resolve(__dirname),
     mode: 'development',
+    // https://webpack.js.org/configuration/entry-context/
     entry: {
         main: {
             import: './site/main.js',
@@ -21,6 +22,7 @@ module.exports = {
         "static": path.resolve(__dirname, 'dist'),
     },
     plugins: [
+        // https://github.com/jantimon/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: 'site/index.html',
             filename: 'index.html',
