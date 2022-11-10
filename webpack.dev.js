@@ -7,7 +7,7 @@ module.exports = {
     // https://webpack.js.org/configuration/entry-context/
     entry: {
         main: {
-            import: './site/main.ts',
+            import: './site/main.tsx',
             filename: "index.js",
         },
         echo1: {
