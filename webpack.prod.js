@@ -3,23 +3,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname),
-    mode: 'development',
+    mode: 'production',
     // https://webpack.js.org/configuration/entry-context/
     entry: {
         main: {
-            import: './site/main.js',
+            import: './site/main.ts',
             filename: "index.js",
         },
         echo1: {
-            import: './echo1/site/echo1.js',
+            import: './echo1/site/echo1.ts',
         }
     },
     output: {
         filename: '[name]/index.js',
         path: path.resolve(__dirname, 'dist'),
-    },
-    "devServer": {
-        "static": path.resolve(__dirname, 'dist'),
     },
     plugins: [
         // https://github.com/jantimon/html-webpack-plugin
@@ -34,7 +31,19 @@ module.exports = {
             chunks: ['echo1']
         }),
     ],
-    devtool: 'inline-source-map',
+    // For tsconfig params see https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
     optimization: {
         runtimeChunk: 'single',
     },
