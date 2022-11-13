@@ -9,9 +9,6 @@ module.exports = {
             import: './site/main.tsx',
             filename: "index.js",
         },
-        echo1: {
-            import: './echo1/site/echo1.ts',
-        }
     },
     output: {
         filename: '[name]/index.js',
@@ -24,11 +21,6 @@ module.exports = {
             filename: 'index.html',
             chunks: ['main'],
         }),
-        new HtmlWebpackPlugin({
-            template: 'echo1/site/index.html',
-            filename: 'echo1/index.html',
-            chunks: ['echo1']
-        }),
     ],
     // For tsconfig params see https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
     module: {
@@ -37,6 +29,21 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    "style-loader",
+                    // Translates CSS into CommonJS
+                    "css-loader",
+                    // Compiles Sass to CSS
+                    "sass-loader",
+                ],
             },
         ],
     },

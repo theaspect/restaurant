@@ -1,5 +1,39 @@
+// https://stackoverflow.com/a/71686319/7991462
 import * as React from "react"
-import * as ReactDom from "react-dom"
-import App from "./App";
+import {StrictMode} from "react"
+import {createRoot} from "react-dom/client";
 
-ReactDom.render(<App/>, document.getElementById('app'));
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min';
+import '@fortawesome/fontawesome-free/css/all.css';
+import ErrorPage from "./components/ErrorPage";
+import Echo1 from "../echo1/site/App";
+import Echo2 from "../echo2/site/App";
+import Layout from "./components/Layout";
+
+const root = createRoot(document.getElementById("app"));
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Layout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                path: "/echo1",
+                element: <Echo1/>
+            },
+            {
+                path: "/echo2",
+                element: <Echo2/>
+            }
+        ]
+    },
+]);
+
+root.render(
+    <StrictMode>
+        <RouterProvider router={router}/>
+    </StrictMode>
+);
