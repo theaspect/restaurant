@@ -1,7 +1,9 @@
 micronaut:
   application:
     name: echo1
-
+  server:
+    cors:
+      enabled: true
 netty:
   default:
     allocator:

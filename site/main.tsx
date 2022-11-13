@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import ErrorPage from "./components/ErrorPage";
 import Echo1 from "../echo1/site/App";
 import Echo2 from "../echo2/site/App";
+import Restaurant from "../restaurant/site/App";
 import Layout from "./components/Layout";
 
 const root = createRoot(document.getElementById("app"));
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: "/echo2",
                 element: <Echo2/>
+            },
+            {
+                path: "/restaurant",
+                element: <Restaurant/>
             }
         ]
     },
