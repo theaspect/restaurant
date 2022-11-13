@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: restaurant
+  server:
+    cors:
+      enabled: true
 
 netty:
   default:
